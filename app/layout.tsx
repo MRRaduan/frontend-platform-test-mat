@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import Head from "next/head";
 import Header from "../components/Header";
+import Providers from "./providers";
 
 export const metadata = {
   title: "MUSE.ai",
@@ -23,7 +24,7 @@ export default function RootLayout({
           <link rel="apple-touch-icon" href="favicon.png" />
         </Head>
         <Header />
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
