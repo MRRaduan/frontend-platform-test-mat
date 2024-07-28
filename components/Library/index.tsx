@@ -1,7 +1,11 @@
-import CardCover from "../components/CardCover";
-import Header from "../components/Header";
+import { MusicEntry } from "../../types";
+import CardCover from "../CardCover";
+import SongList from "../SongList";
 
-export default function Home() {
+const Library = async () => {
+  const response = await fetch("http://127.0.0.1:3000/songs");
+  const data = await response.json();
+  const songs: MusicEntry[] = data.songs;
   return (
     <div>
       <main>
@@ -11,7 +15,7 @@ export default function Home() {
               <div className="flex flex-col">
                 <h1 className="text-[32px] font-bold">Your Library</h1>
                 <span className="text-base text-white/[.5] inline-block mt-2.5 md:mt-5">
-                  You have 10 songs in your library
+                  You have {songs.length} songs in your library
                 </span>
               </div>
               <button className="mt-6 md:-mt-2 md:-ml-9 h-9 flex items-center bg-white/15 bold text-sm px-6 py-2 rounded-full">
@@ -34,10 +38,10 @@ export default function Home() {
               </button>
             </div>
             <div className="Sort-Search flex flex-col -mt-8 md:flex-row md:items-center md:-mt-10">
-              <label class="flex items-center cursor-pointer self-end md:self-center md:mr-6">
-                <span class="me-3 text-sm font-bold">Sort from A-Z</span>
-                <input type="checkbox" value="" class="sr-only peer" />
-                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#00DAE8]"></div>
+              <label className="flex items-center cursor-pointer self-end md:self-center md:mr-6">
+                <span className="me-3 text-sm font-bold">Sort from A-Z</span>
+                <input type="checkbox" value="" className="sr-only peer" />
+                <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#00DAE8]"></div>
               </label>
               <label
                 htmlFor="search-input"
@@ -70,10 +74,11 @@ export default function Home() {
           </div>
 
           <div className="mt-10">
-            <CardCover hasFavoriteOption />
+            <SongList songs={songs} />
           </div>
         </div>
       </main>
     </div>
   );
-}
+};
+export default Library;

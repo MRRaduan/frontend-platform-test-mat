@@ -3,7 +3,7 @@ const fs = require("fs");
 const hostname = "127.0.0.1";
 const port = 3000;
 const payload = JSON.parse(
-  fs.readFileSync("./server-payload.json", { encoding: "utf8" })
+  fs.readFileSync("./server-payload.json", { encoding: "utf8" }),
 );
 
 const server = http.createServer((req, res) => {

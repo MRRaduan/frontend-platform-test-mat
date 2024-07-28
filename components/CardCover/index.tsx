@@ -1,25 +1,39 @@
+import Link from "next/link";
+
 type TCardCoverProps = {
-  hasFavoriteOption?: false;
+  songId: number;
+  title: string;
+  artist: string;
+  coverArt: string;
+  hasFavoriteOption?: boolean;
 };
 
-const CardCover = ({ hasFavoriteOption }: TCardCoverProps) => {
+const CardCover = ({
+  songId,
+  title,
+  artist,
+  coverArt,
+  hasFavoriteOption,
+}: TCardCoverProps) => {
   return (
     <div className="Card flex min-[1152px]:max-w-[204px] lg:flex-col w-full rounded-md bg-neutral-800">
-      <div>
+      <Link href={`/artist/${songId}`}>
         <img
-          src="/assets/images/beatles-cover.jpeg"
+          src={`/assets/images/${coverArt}`}
           width="100%"
           height="100%"
           alt="beatles"
-          className="max-w-24 lg:max-w-full"
+          className="max-w-24 lg:max-w-full rounded-t-md"
         />
-      </div>
-      <div className="p-2 lg:p-4 w-full flex items-center">
+      </Link>
+      <div className="p-2 lg:p-4 w-full lg:h-[120px] flex items-center">
         <div className="w-full">
-          <h4 className="font-bold text-lg">Outside</h4>
+          <Link href={`/artist/${songId}`}>
+            <h4 className="font-bold text-lg hover:underline">{title}</h4>
+          </Link>
           <div className="mt-1 lg:mt-3 flex justify-between w-full">
             <p className="block font-bold text-[#666666] lg:text-xs">
-              Foo Fighters
+              {artist}
             </p>
             {hasFavoriteOption ? (
               <div>

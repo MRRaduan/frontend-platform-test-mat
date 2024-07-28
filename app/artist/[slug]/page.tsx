@@ -1,18 +1,20 @@
-import { useRouter } from "next/router";
-import CardCover from "../../components/CardCover";
+import { MusicEntry } from "../../../types";
+import RelatedSongs from "./RelatedSongs";
 
-export default function Page() {
-  const router = useRouter();
+export default async function Page({ params }: { params: { slug: string } }) {
+  const response = await fetch(`http://127.0.0.1:3000/songs/${params.slug}`);
+  const data = await response.json();
+  const { song }: MusicEntry = data;
   return (
     <>
       <div className="Container px-6 min-[1152px]:px-0 w-full max-w-[1152px] mt-12 lg:mt-[73px] mx-auto">
         <div className="lg:flex lg:items-center">
           <div className="Cover max-lg:w-full max-lg:flex  max-lg:justify-center">
             <img
-              src="/assets/images/beatles-cover.jpeg"
+              src={`/assets/images/${song.files.coverArt}`}
               width="204px"
               height="204px"
-              alt="beatles"
+              alt={song.title}
               className="rounded-md"
               style={{ border: "solid 1px #666" }}
             />
@@ -34,10 +36,11 @@ export default function Page() {
                 </svg>
               </button>
               <div className="ml-[38px]">
-                <h1 className="text-[32px] font-bold leading-5">These Days</h1>
+                <h1 className="text-[32px] font-bold leading-5">
+                  {song.title}
+                </h1>
                 <span className="text-base leading-5 inline-block mt-3 text-white/[0.9]">
-                  Foo Fighters &nbsp; | &nbsp; Wasting Light &nbsp; | &nbsp;
-                  1998
+                  {song.artist} | {song.album.title} | {song.album.year}
                 </span>
               </div>
             </div>
@@ -53,12 +56,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="mt-24">
-          <h4 className="text-base text-white/[0.7]">Other albums</h4>
-          <div className="mt-5">
-            <CardCover />
-          </div>
-        </div>
+        <RelatedSongs />
       </div>
     </>
   );
