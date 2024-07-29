@@ -1,12 +1,27 @@
+"use client";
 import React from "react";
 import { MusicEntry } from "../../../types";
 import RelatedSongs from "./RelatedSongs";
 import Player from "./Player";
+import { useQuery } from "@tanstack/react-query";
+import { LoadingSkeleton } from "../../../components/Library";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const response = await fetch(`http://127.0.0.1:3000/songs/${params.slug}`);
-  const data = await response.json();
-  const { song }: MusicEntry = data;
+const getSingleSong = async (slug: string) => {
+  const response = await fetch(`http://127.0.0.1:3000/songs/${slug}`);
+  const data: MusicEntry = await response.json();
+  return data;
+};
+
+export default function Page({ params }: { params: { slug: string } }) {
+  const { isPending, data } = useQuery({
+    queryKey: [params.slug],
+    queryFn: () => getSingleSong(params.slug),
+  });
+
+  if (isPending) {
+    return <LoadingSkeleton />;
+  }
+
   return (
     <div
       className="relative bg-[#12303B] h-screen"
@@ -18,7 +33,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <div
         className="Container px-6 min-[1152px]:px-0 w-full max-w-[1152px] pt-12 lg:pt-[73px] mx-auto"
         style={{
-          backgroundImage: `url(/assets/images/${song.files.poster})`,
+          backgroundImage: `url(/assets/images/${data.song.files.poster})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "90% 15%",
           backgroundAttachment: "fixed",
@@ -26,8 +41,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
           backgroundBlendMode: "screen",
         }}
       >
-        <Player song={song} songId={params.slug} />
-        <RelatedSongs currentSong={song} />
+        <Player song={data.song} songId={params.slug} />
+        <RelatedSongs currentSong={data.song} />
       </div>
     </div>
   );

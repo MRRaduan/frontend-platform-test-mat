@@ -10,7 +10,6 @@ type RelatedSongsListProps = {
 };
 
 const RelatedSongsList = ({ allSongs, currentSong }: RelatedSongsListProps) => {
-  console.log("[currentSong]: ", currentSong);
   const [artistSongs, setArtistSongs] = useState(
     allSongs.filter(
       (song) =>
