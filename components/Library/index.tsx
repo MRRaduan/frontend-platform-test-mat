@@ -1,12 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MusicEntry } from "../../types";
 import SongList from "../SongList";
 import { useQuery } from "@tanstack/react-query";
 import AutocompleteSearch from "../AutocompleteSearch";
 
 export const getSongs = async () => {
-  const response = await fetch("http://127.0.0.1:3000/songs");
+  const response = await fetch(`http://127.0.0.1:3000/songs`);
   const data = await response.json();
   const songs: MusicEntry[] = data.songs;
   return songs;

@@ -1,15 +1,12 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import CardCover from "../../../components/CardCover";
 import { getSongs } from "../../../components/Library";
-import SongList from "../../../components/SongList";
-import { MusicEntry } from "../../../types";
-import { Hash } from "crypto";
+import { MusicEntry, Song } from "../../../types";
 import RelatedSongsList from "./RelatedSongsList";
 
 type RelatedSongsProps = {
-  currentSong: MusicEntry;
+  currentSong: Song;
 };
 
 const RelatedSongs = ({ currentSong }: RelatedSongsProps) => {

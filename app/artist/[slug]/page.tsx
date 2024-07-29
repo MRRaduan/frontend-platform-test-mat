@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         }}
       >
         <Player song={song} songId={params.slug} />
-        <RelatedSongs currentSong={data.song} />
+        <RelatedSongs currentSong={song} />
       </div>
     </div>
   );
