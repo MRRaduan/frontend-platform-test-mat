@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="bg-dark-grey w-full px-6 min-[1152px]:px-0 h-20 flex items-center">
+    <header className="bg-dark-grey w-full px-6 min-[1152px]:px-0 h-20 flex items-center sticky top-0">
       <div className="w-full max-w-[1152px] mx-auto my-0 flex items-center h-auto">
         <Link href="/">
           <svg
@@ -25,8 +25,8 @@ const Header = () => {
                 y2="21"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#00F2D5" />
-                <stop offset="1" stop-color="#AD00FF" />
+                <stop stopColor="#00F2D5" />
+                <stop offset="1" stopColor="#AD00FF" />
               </linearGradient>
             </defs>
           </svg>

@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="pb-20">
+      <body>
         <Head>
           <title>MUSE.ai</title>
           <link rel="shortcut icon" href="favicon.png" />
