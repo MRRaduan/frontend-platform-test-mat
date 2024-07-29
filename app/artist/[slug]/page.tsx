@@ -7,7 +7,9 @@ import { useQuery } from "@tanstack/react-query";
 import { LoadingSkeleton } from "../../../components/Library";
 
 const getSingleSong = async (slug: string) => {
-  const response = await fetch(`http://127.0.0.1:3000/songs/${slug}`);
+  const response = await fetch(
+    `https://muse-node-hohefcagn-matheus-raduans-projects.vercel.app/song/860https://muse-node-hohefcagn-matheus-raduans-projects.vercel.app/song/${slug}`,
+  );
   const data: MusicEntry = await response.json();
   return data;
 };

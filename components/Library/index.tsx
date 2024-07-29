@@ -6,7 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import AutocompleteSearch from "../AutocompleteSearch";
 
 export const getSongs = async () => {
-  const response = await fetch(`http://127.0.0.1:3000/songs`);
+  const response = await fetch(
+    `https://muse-node-hohefcagn-matheus-raduans-projects.vercel.app/songs`,
+  );
   const data = await response.json();
   const songs: MusicEntry[] = data.songs;
   return songs;
